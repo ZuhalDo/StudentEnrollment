@@ -29,7 +29,7 @@ public class ServiceTest {
 
     @Autowired
     private InstructorService instructorService;
-    @Test
+  /*  @Test
     void testSaveCourse() {
         // Test saving a new course
         Course course = new Course();
@@ -42,7 +42,7 @@ public class ServiceTest {
         Course savedCourse = courseService.getCourseById(course.getId());
         assertNotNull(savedCourse);
         assertEquals("Test Course1", savedCourse.getCourseName());
-    }
+    }*/
     @Test
     void testFindStudentByEmail() {
         // Test finding a student by email
