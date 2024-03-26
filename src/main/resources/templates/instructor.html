@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Enrollment</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #F0F2F5;
+        }
+
+        /* Style for the side navigator */
+        .sidenav {
+            height: 90%;
+            width: 250px;
+            position: fixed;
+            top: 40px;
+            left: 20px;
+            padding-top: 50px;
+            background-color: #333;
+            color: white;
+            border-radius: 30px 30px 30px 30px;
+        }
+
+        /* Style for the navigation links */
+        .sidenav a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: white;
+        }
+
+        /* Style for the active link */
+        .sidenav a.active {
+            background-color: #f8228d;
+        }
+
+        /* Style for the content */
+        .content {
+            padding: 20px;
+            margin-left: 250px;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Side Navigator -->
+        <aside class="sidenav">
+            <!-- Logo and Brand Name -->
+            <div class="text-center mb-4">
+                <!-- <img th:src="@{/img/cap_1.png}" alt="Logo" height="70"><br/><br/>-->
+                <h2 class="text-white">Instructor Portal</h2>
+            </div>
+            <!-- Navigation Links -->
+            <ul class=".bg-gradient-primary">
+                <li class="nav-item">
+                    <a class="nav-link active" th:href="@{/instructor/}">Dashboard</a>
+                </li>
+              <!--  <li class="nav-item">
+                    <a class="nav-link" th:href="@{/edit/}">Edit Course</a>
+                </li>-->
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/logout}">Logout</a>
+                </li>
+
+            </ul>
+        </aside>
+
+        <div class="col-lg-9 col-md-8 content">
+            <div class="container mt-4">
+                <h1></h1>
+            </div>
+
+            <div class="container mt-5">
+                <h2 class="mb-4">Courses</h2>
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>Course Code</th>
+                        <th>Course Name</th>
+                        <th>Credit</th>
+                        <th>Description</th>
+                        <th>Instructor</th>
+                        <th>Available Seats</th>
+                        <th>Status</th>
+                        <th>Students</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="course: ${courses}">
+                        <td th:text="${course.courseCode}"></td>
+                        <td th:text="${course.courseName}"></td>
+                        <td th:text="${course.credits}"></td>
+                        <td th:text="${course.description}"></td>
+                        <td th:text="${course.instructor.firstName + ' ' + course.instructor.lastName}">Instructor</td>
+                        <td th:text="${course.capacity}"></td>
+                        <td th:text="${course.status}"></td>
+                        <td>
+                            <ul>
+                                <li th:each="student : ${course.students}" th:text="${student.firstname + ' ' + student.lastname}"></li>
+                            </ul>
+                        </td>
+                        <td align="center">
+                            <!-- Edit Button -->
+                            <a th:href="@{'/instructor/edit/' + ${course.id}}" class="btn btn-primary">Edit</a>
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</div>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Enrollment</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #F0F2F5;
+        }
+
+        /* Style for the side navigator */
+        .sidenav {
+            height: 90%;
+            width: 250px;
+            position: fixed;
+            top: 40px;
+            left: 20px;
+            padding-top: 50px;
+            background-color: #333;
+            color: white;
+            border-radius: 30px 30px 30px 30px;
+        }
+
+        /* Style for the navigation links */
+        .sidenav a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: white;
+        }
+
+        /* Style for the active link */
+        .sidenav a.active {
+            background-color: #f8228d;
+        }
+
+        /* Style for the content */
+        .content {
+            padding: 20px;
+            margin-left: 250px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Side Navigator -->
+        <aside class="sidenav">
+            <!-- Logo and Brand Name -->
+            <div class="text-center mb-4">
+                <!--<img src="img/cap_1.png" alt="Logo" height="70"><br/><br/>-->
+                <h2 class="text-white">Admin Portal</h2>
+            </div>
+            <!-- Navigation Links -->
+            <ul class=".bg-gradient-primary">
+                <li class="nav-item">
+                    <a class="nav-link " th:href="@{/admin/admin}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " th:href="@{/admin/instructor/all}">Instructors</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/courses/all}">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/student/all}">Students</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/instructor/new}">Add Instructor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" th:href="@{/courses/new}">Add New Course</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/student/new}">Add New Students</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/logout}">Logout</a>
+                </li>
+
+            </ul>
+        </aside>
+
+        <div class="col-lg-9 col-md-8 content">
+            <div class="container mt-4">
+            </div>
+
+            <div class="container mt-4">
+                <h1>Add New Course</h1>
+                <form th:action="@{/courses/save}" method="post">
+                    <div class="form-group">
+                        <label for="courseCode">Course Code:</label>
+                        <input type="text" class="form-control" id="courseCode" name="courseCode"
+                               th:value="${course.courseCode}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="courseName">Course Name:</label>
+                        <input type="text" class="form-control" id="courseName" name="courseName"
+                               th:value="${course.courseName}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="credits">Credits:</label>
+                        <input type="number" class="form-control" id="credits" name="credits"
+                               th:value="${course.credits}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <textarea class="form-control" id="description" name="description"
+                                  th:value="${course.description}" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="instructorId">Instructor:</label>
+                        <select class="form-control" id="instructorId" name="instructorId">
+                            <option th:each="instructor : ${instructors}"
+                                    th:value="${instructor.id}"
+                                    th:text="${instructor.firstName + ' ' + instructor.lastName}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="capacity">Capacity:</label>
+                        <input type="number" class="form-control" id="capacity" name="capacity"
+                               th:value="${course.capacity}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="semester">Semester</label>
+                        <select  class="form-control" id="semester" name="semester"
+                               th:field="*{course.semester}"  required>
+                        <option value="Fall">Fall</option>
+                        <option value="Spring">Spring</option>
+                        <option value="Summer">Summer</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status:</label>
+                        <select class="form-control" id="status" name="status"
+                                th:value="${course.status}" required>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</div>
+</body>
+</html>

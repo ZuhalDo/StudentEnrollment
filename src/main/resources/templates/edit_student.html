@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Enrollment</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #F0F2F5;
+        }
+
+        /* Style for the side navigator */
+        .sidenav {
+            height: 90%;
+            width: 250px;
+            position: fixed;
+            top: 40px;
+            left: 20px;
+            padding-top: 50px;
+            background-color: #333;
+            color: white;
+            border-radius: 30px 30px 30px 30px;
+        }
+
+        /* Style for the navigation links */
+        .sidenav a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: white;
+        }
+
+        /* Style for the active link */
+        .sidenav a.active {
+            background-color: #f8228d;
+        }
+
+        /* Style for the content */
+        .content {
+            padding: 20px;
+            margin-left: 250px;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Side Navigator -->
+        <aside class="sidenav">
+            <!-- Logo and Brand Name -->
+            <div class="text-center mb-4">
+                <!-- <img th:src="@{/img/cap_1.png}" alt="Logo" height="70"><br/><br/>-->
+                <h2 class="text-white">Admin Portal</h2>
+            </div>
+            <!-- Navigation Links -->
+            <ul class=".bg-gradient-primary">
+                <li class="nav-item">
+                    <a class="nav-link " th:href="@{/admin/admin}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " th:href="@{/admin/instructor/all}">Instructors</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/courses/all}">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/student/all}">Students</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/instructor/new}">Add Instructor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" th:href="@{/courses/new}">Add New Course</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/student/new}">Add New Students</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/logout}">Logout</a>
+                </li>
+
+            </ul>
+        </aside>
+        <div class="col-lg-9 col-md-8 content">
+            <div class="container mt-4">
+            </div>
+
+            <div class="container mt-4">
+                <h1>Edit Student</h1>
+
+                <form th:action="@{/student/{id}(id=${student.id})}" th:object = "${student}" method="post">
+                    <div class="form-group">
+                        <label for="firstname">Student First Name</label>
+                        <input type="text" class="form-control" id="firstname" name="firstname"
+                               th:value="${student.firstname}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Student Last Name</label>
+                        <input type="text" class="form-control" id="lastname" name="lastname"
+                               th:value="${student.lastname}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Student Email</label>
+                        <input type="email" class="form-control" id="email" name="email"
+                               th:value="${student.email}" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

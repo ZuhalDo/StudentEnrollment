@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.thymeleaf.org/extras/spring-form">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <!-- Bootstrap CSS from CDN -->
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}">
+    <!-- Custom CSS -->
+    <style>
+        /* Style for the background image */
+        body {
+            background-image: url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80'); /* Replace 'background.jpg' with the path to your image */
+            background-color: #f8f9fc; /* Light gray background */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Style for the sign-up container */
+        .signup-container {
+            max-width: 500px;
+            padding: 40px;
+            background-color: #ffffff; /* White background */
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Shadow effect */
+        }
+
+        /* Style for the form */
+        .signup-form {
+            width: 100%;
+        }
+
+        /* Style for the submit button */
+        .btn-primary {
+            background-color: #007bff; /* Blue button color */
+            border-color: #007bff; /* Blue border color */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sign Up Container -->
+<div class="signup-container">
+    <!-- Sign Up Form -->
+    <form th:action="@{/sign-up}" th:object="${user}" method="post" class="signup-form">
+
+
+        <h2 class="text-center mb-4">Sign Up</h2>
+
+        <div class="form-group"
+             th:classappend="${#fields.hasErrors('firstName')}? 'has-error':''">
+            <label for="firstName" class="control-label">First name</label> <input
+                id="firstName" class="form-control" th:field="*{firstName}" />
+            <p class="error-message"
+               th:each="error: ${#fields.errors('firstName')}"
+               th:text="${error}">Validation error</p>
+        </div>
+        <div class="form-group"
+             th:classappend="${#fields.hasErrors('lastName')}? 'has-error':''">
+            <label for="lastName" class="control-label">Last name</label> <input
+                id="lastName" class="form-control" th:field="*{lastName}" />
+            <p class="error-message"
+               th:each="error : ${#fields.errors('lastName')}"
+               th:text="${error}">Validation error</p>
+        </div>
+        <div class="form-group"
+             th:classappend="${#fields.hasErrors('email')}? 'has-error':''">
+            <label for="email" class="control-label">E-mail</label> <input
+                id="email" class="form-control" th:field="*{email}" />
+            <p class="error-message"
+               th:each="error : ${#fields.errors('email')}" th:text="${error}">Validation
+                error</p>
+        </div>
+        <div class="form-group"
+             th:classappend="${#fields.hasErrors('confirmEmail')}? 'has-error':''">
+            <label for="confirmEmail" class="control-label">Confirm
+                e-mail</label> <input id="confirmEmail" class="form-control"
+                                      th:field="*{confirmEmail}" />
+            <p class="error-message"
+               th:each="error : ${#fields.errors('confirmEmail')}"
+               th:text="${error}">Validation error</p>
+        </div>
+        <div class="form-group"
+             th:classappend="${#fields.hasErrors('password')}? 'has-error':''">
+            <label for="password" class="control-label">Password</label> <input
+                id="password" class="form-control" type="password"
+                th:field="*{password}" />
+            <p class="error-message"
+               th:each="error : ${#fields.errors('password')}"
+               th:text="${error}">Validation error</p>
+        </div>
+        <div class="form-group"
+             th:classappend="${#fields.hasErrors('confirmPassword')}? 'has-error':''">
+            <label for="confirmPassword" class="control-label">Confirm
+                password</label> <input id="confirmPassword" class="form-control"
+                                        type="password" th:field="*{confirmPassword}" />
+            <p class="error-message"
+               th:each="error : ${#fields.errors('confirmPassword')}"
+               th:text="${error}">Validation error</p>
+        </div>
+
+        <div class="form-group">
+            <label for="roles" class="control-label">Role</label>
+            <select id="roles" class="form-control" th:field="*{roles}">
+                <option value="ROLE_ADMIN">Admin</option>
+                <option value="ROLE_INSTRUCTOR">Instructor</option>
+                <option value="ROLE_STUDENT">Student</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="form-control btn btn-primary">Signup</button>
+            <br/><br/><span>Already registered? <a href="/" th:href="@{/login}">Login
+								here</a></span>
+        </div>
+
+    </form>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

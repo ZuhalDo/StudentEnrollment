@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Enrollment</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #F0F2F5;
+        }
+
+        /* Style for the side navigator */
+        .sidenav {
+            height: 90%;
+            width: 250px;
+            position: fixed;
+            top: 40px;
+            left: 20px;
+            padding-top: 50px;
+            background-color: #333;
+            color: white;
+            border-radius: 30px 30px 30px 30px;
+        }
+
+        /* Style for the navigation links */
+        .sidenav a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: white;
+        }
+
+        /* Style for the active link */
+        .sidenav a.active {
+            background-color: #f8228d;
+        }
+
+        /* Style for the content */
+        .content {
+            padding: 20px;
+            margin-left: 250px;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Side Navigator -->
+        <aside class="sidenav">
+            <!-- Logo and Brand Name -->
+            <div class="text-center mb-4">
+                <!-- <img th:src="@{/img/cap_1.png}" alt="Logo" height="70"><br/><br/>-->
+                <h2 class="text-white">Instructor Portal</h2>
+            </div>
+            <!-- Navigation Links -->
+            <ul class=".bg-gradient-primary">
+                <li class="nav-item">
+                    <a class="nav-link " th:href="@{/instructor}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Edit Course</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/logout}">Logout</a>
+                </li>
+
+            </ul>
+        </aside>
+
+        <div class="col-lg-9 col-md-8 content">
+
+            <div class="container mt-4">
+                <h1>Edit Course</h1>
+                <form th:action="@{/instructor/{id}(id=${course.id})}" th:object = "${course}" method="post">
+                    <div class="form-group">
+                        <label for="courseCode">Course Code:</label>
+                        <input type="text" class="form-control" id="courseCode" name="courseCode"
+                               th:field="*{courseCode}"
+                               required>
+                    </div>
+                    <div class="form-group">
+                        <label for="courseName">Course Name:</label>
+                        <input type="text" class="form-control" id="courseName" name="courseName"
+                               th:field="*{courseName}"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <textarea class="form-control" id="description" name="description" rows="3"
+                                  th:field="*{description}"
+                                  required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="capacity">Capacity:</label>
+                        <input type="number" class="form-control" id="capacity" name="capacity"
+                               th:field="*{capacity}"
+                               required>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</div>
+</body>
+</html>
